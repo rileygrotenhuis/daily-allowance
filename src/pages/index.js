@@ -33,7 +33,7 @@ const Home = (props) => {
   const [newAmount, setNewAmount] = useState(null);
 
   return (
-    <>
+    <div style={{ marginTop: '25px' }}>
       <Modal
         open={newAmountModalOpen}
         onClose={() => {
@@ -264,7 +264,7 @@ const Home = (props) => {
           New Day
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
