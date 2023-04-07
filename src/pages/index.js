@@ -5,18 +5,30 @@ import { getSession } from 'next-auth/react';
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
 
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      user: session?.user ?? null,
+      user: session.user,
     },
   };
 };
 
 const Home = (props) => {
   const [newAmountModalOpen, setNewAmountModalOpen] = useState(false);
-  const [settingsModalOpen, setSettingsModalOpen] = useState(true);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [currentBalance, setCurrentBalance] = useState(
+    props.user.currentBalance
+  );
   const [newAmount, setNewAmount] = useState(null);
-  const [newAllowance, setNewAllowance] = useState(null);
+  const [newAllowance, setNewAllowance] = useState(props.user.dailyAllowance);
 
   return (
     <>
@@ -100,7 +112,7 @@ const Home = (props) => {
               variant="outlined"
               label="Amount"
               type="number"
-              value={newAmount}
+              value={newAllowance}
               onChange={(e) => {
                 setNewAllowance(e.target.value);
               }}
@@ -160,7 +172,7 @@ const Home = (props) => {
               margin: 'auto',
             }}
           >
-            $30.67
+            ${currentBalance}
           </Typography>
         </Card>
       </Button>

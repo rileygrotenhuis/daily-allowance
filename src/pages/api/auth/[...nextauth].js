@@ -20,6 +20,8 @@ export const authOptions = {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
+        session.user.dailyAllowance = user.dailyAllowance;
+        session.user.currentBalance = user.currentBalance;
       }
 
       return session;
