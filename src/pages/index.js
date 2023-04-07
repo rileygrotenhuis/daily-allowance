@@ -27,6 +27,9 @@ const Home = (props) => {
   const [currentBalance, setCurrentBalance] = useState(
     props.user.currentBalance
   );
+  const [dailyAllowance, setDailyAllowance] = useState(
+    props.user.dailyAllowance
+  );
   const [newAmount, setNewAmount] = useState(null);
   const [newAllowance, setNewAllowance] = useState(props.user.dailyAllowance);
 
@@ -151,8 +154,22 @@ const Home = (props) => {
             <Button
               variant="contained"
               color="error"
-              onClick={() => {
-                alert('RESETTING BALANCE');
+              onClick={async () => {
+                const res = await fetch('http://localhost:3000/api/balance', {
+                  method: 'PUT',
+                  headers: {
+                    Authorization: `Bearer ${props.user.id}`,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    amount: dailyAllowance,
+                  }),
+                });
+
+                const data = await res.json();
+
+                setCurrentBalance(data.currentBalance);
+                setSettingsModalOpen(false);
               }}
             >
               Reset Balance
