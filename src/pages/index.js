@@ -31,7 +31,6 @@ const Home = (props) => {
     props.user.dailyAllowance
   );
   const [newAmount, setNewAmount] = useState(null);
-  const [newAllowance, setNewAllowance] = useState(props.user.dailyAllowance);
 
   return (
     <>
@@ -115,9 +114,9 @@ const Home = (props) => {
               variant="outlined"
               label="Amount"
               type="number"
-              value={newAllowance}
+              value={dailyAllowance}
               onChange={(e) => {
-                setNewAllowance(e.target.value);
+                setDailyAllowance(e.target.value);
               }}
             />
             <Button
@@ -130,13 +129,13 @@ const Home = (props) => {
                     'Content-Type': 'application/json',
                   },
                   body: JSON.stringify({
-                    amount: newAllowance,
+                    amount: dailyAllowance,
                   }),
                 });
 
                 const data = await res.json();
 
-                setNewAllowance(data.dailyAllowance);
+                setDailyAllowance(data.dailyAllowance);
                 setCurrentBalance(data.currentBalance);
                 setSettingsModalOpen(false);
               }}
@@ -169,6 +168,7 @@ const Home = (props) => {
                 const data = await res.json();
 
                 setCurrentBalance(data.currentBalance);
+                setDailyAllowance(data.dailyAllowance);
                 setSettingsModalOpen(false);
               }}
             >
