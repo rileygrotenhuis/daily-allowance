@@ -73,16 +73,19 @@ const Home = (props) => {
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch('http://localhost:3000/api/balance', {
-                  method: 'POST',
-                  headers: {
-                    Authorization: `Bearer ${props.user.id}`,
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    amount: newAmount,
-                  }),
-                });
+                const res = await fetch(
+                  'https://daily-allowance.vercel.app/api/balance',
+                  {
+                    method: 'POST',
+                    headers: {
+                      Authorization: `Bearer ${props.user.id}`,
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      amount: newAmount,
+                    }),
+                  }
+                );
 
                 const data = await res.json();
 
@@ -136,16 +139,19 @@ const Home = (props) => {
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch('http://localhost:3000/api/allowance', {
-                  method: 'PUT',
-                  headers: {
-                    Authorization: `Bearer ${props.user.id}`,
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    amount: dailyAllowance,
-                  }),
-                });
+                const res = await fetch(
+                  'https://daily-allowance.vercel.app/api/allowance',
+                  {
+                    method: 'PUT',
+                    headers: {
+                      Authorization: `Bearer ${props.user.id}`,
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      amount: dailyAllowance,
+                    }),
+                  }
+                );
 
                 const data = await res.json();
 
@@ -168,16 +174,19 @@ const Home = (props) => {
               variant="contained"
               color="error"
               onClick={async () => {
-                const res = await fetch('http://localhost:3000/api/balance', {
-                  method: 'PUT',
-                  headers: {
-                    Authorization: `Bearer ${props.user.id}`,
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    amount: dailyAllowance,
-                  }),
-                });
+                const res = await fetch(
+                  'https://daily-allowance.vercel.app/api/balance',
+                  {
+                    method: 'PUT',
+                    headers: {
+                      Authorization: `Bearer ${props.user.id}`,
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      amount: dailyAllowance,
+                    }),
+                  }
+                );
 
                 const data = await res.json();
 
@@ -248,13 +257,16 @@ const Home = (props) => {
             margin: 'auto',
           }}
           onClick={async () => {
-            const res = await fetch('http://localhost:3000/api/day', {
-              method: 'POST',
-              headers: {
-                Authorization: `Bearer ${props.user.id}`,
-                'Content-Type': 'application/json',
-              },
-            });
+            const res = await fetch(
+              'https://daily-allowance.vercel.app/api/day',
+              {
+                method: 'POST',
+                headers: {
+                  Authorization: `Bearer ${props.user.id}`,
+                  'Content-Type': 'application/json',
+                },
+              }
+            );
 
             const data = await res.json();
 
