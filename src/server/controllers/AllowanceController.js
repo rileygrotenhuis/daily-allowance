@@ -1,14 +1,16 @@
 import prisma from '@/config/prisma';
 
 class AllowanceController {
-  updateDailyAllowance = async (res, res) => {
+  updateDailyAllowance = async (req, res) => {
+    console.log(req.body);
+
     const user = await prisma.user.update({
       where: {
         id: req.user,
       },
       data: {
-        dailyAllowance: req.body.amount,
-        currentBalance: req.body.amount,
+        dailyAllowance: parseFloat(req.body.amount),
+        currentBalance: parseFloat(req.body.amount),
       },
     });
 

@@ -119,9 +119,22 @@ const Home = (props) => {
             />
             <Button
               variant="contained"
-              onClick={() => {
-                alert(newAllowance);
-                setNewAllowance(null);
+              onClick={async () => {
+                const res = await fetch('http://localhost:3000/api/allowance', {
+                  method: 'PUT',
+                  headers: {
+                    Authorization: `Bearer ${props.user.id}`,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    amount: newAllowance,
+                  }),
+                });
+
+                const data = await res.json();
+
+                setNewAllowance(data.dailyAllowance);
+                setCurrentBalance(data.currentBalance);
                 setSettingsModalOpen(false);
               }}
             >
