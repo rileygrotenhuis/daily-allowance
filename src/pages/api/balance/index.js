@@ -8,7 +8,7 @@ const userModel = new UserModel();
 
 const routeMappings = {
   GET: routingUtility.restrictRequestMethod,
-  POST: routingUtility.restrictRequestMethod,
+  POST: controller.makePayment,
   PUT: controller.resetBalance,
   DELETE: routingUtility.restrictRequestMethod,
 };
