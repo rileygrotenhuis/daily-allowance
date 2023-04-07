@@ -220,20 +220,50 @@ const Home = (props) => {
           </Typography>
         </Card>
       </Button>
-      <Button
-        variant="contained"
-        color="success"
+      <div
         style={{
           display: 'flex',
+          width: '250px',
           margin: 'auto',
+          justifyContent: 'center',
           marginTop: '10px',
         }}
-        onClick={() => {
-          setSettingsModalOpen(true);
-        }}
       >
-        Settings
-      </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{
+            margin: 'auto',
+          }}
+          onClick={() => {
+            setSettingsModalOpen(true);
+          }}
+        >
+          Settings
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          style={{
+            margin: 'auto',
+          }}
+          onClick={async () => {
+            const res = await fetch('http://localhost:3000/api/day', {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${props.user.id}`,
+                'Content-Type': 'application/json',
+              },
+            });
+
+            const data = await res.json();
+
+            setCurrentBalance(data.currentBalance);
+          }}
+        >
+          New Day
+        </Button>
+      </div>
     </>
   );
 };
