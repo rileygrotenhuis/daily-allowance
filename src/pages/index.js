@@ -74,7 +74,7 @@ const Home = (props) => {
               variant="contained"
               onClick={async () => {
                 const res = await fetch(
-                  'https://daily-allowance.vercel.app/api/balance',
+                  'https://allowance.rileygrotenhuis.com/api/balance',
                   {
                     method: 'POST',
                     headers: {
@@ -140,7 +140,7 @@ const Home = (props) => {
               variant="contained"
               onClick={async () => {
                 const res = await fetch(
-                  'https://daily-allowance.vercel.app/api/allowance',
+                  'https://allowance.rileygrotenhuis.com/api/allowance',
                   {
                     method: 'PUT',
                     headers: {
@@ -175,7 +175,7 @@ const Home = (props) => {
               color="error"
               onClick={async () => {
                 const res = await fetch(
-                  'https://daily-allowance.vercel.app/api/balance',
+                  'https://allowance.rileygrotenhuis.com/api/balance',
                   {
                     method: 'PUT',
                     headers: {
@@ -258,7 +258,7 @@ const Home = (props) => {
           }}
           onClick={async () => {
             const res = await fetch(
-              'https://daily-allowance.vercel.app/api/day',
+              'https://allowance.rileygrotenhuis.com/api/day',
               {
                 method: 'POST',
                 headers: {
