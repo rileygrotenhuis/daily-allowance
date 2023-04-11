@@ -75,7 +75,7 @@ const Home = (props) => {
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch('http://localhost:3000/api/balance', {
+                const res = await fetch('https://allowance.rileygrotenhuis.com/api/balance', {
                   method: 'POST',
                   headers: {
                     Authorization: `Bearer ${props.user.id}`,
@@ -139,7 +139,7 @@ const Home = (props) => {
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch('http://localhost:3000/api/total', {
+                const res = await fetch('https://allowance.rileygrotenhuis.com/api/total', {
                   method: 'PUT',
                   headers: {
                     Authorization: `Bearer ${props.user.id}`,
@@ -180,7 +180,7 @@ const Home = (props) => {
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch('http://localhost:3000/api/allowance', {
+                const res = await fetch('https://allowance.rileygrotenhuis.com/api/allowance', {
                   method: 'PUT',
                   headers: {
                     Authorization: `Bearer ${props.user.id}`,
@@ -212,7 +212,7 @@ const Home = (props) => {
               variant="contained"
               color="error"
               onClick={async () => {
-                const res = await fetch('http://localhost:3000/api/balance', {
+                const res = await fetch('https://allowance.rileygrotenhuis.com/api/balance', {
                   method: 'PUT',
                   headers: {
                     Authorization: `Bearer ${props.user.id}`,
@@ -294,7 +294,7 @@ const Home = (props) => {
             margin: 'auto',
           }}
           onClick={async () => {
-            const res = await fetch('http://localhost:3000/api/day', {
+            const res = await fetch('https://allowance.rileygrotenhuis.com/api/day', {
               method: 'POST',
               headers: {
                 Authorization: `Bearer ${props.user.id}`,
