@@ -1,4 +1,4 @@
-import prisma from "@/config/prisma";
+import prisma from '@/config/prisma';
 
 class TotalController {
   updateTotalBalance = async (req, res) => {
@@ -7,8 +7,8 @@ class TotalController {
         id: req.user,
       },
       data: {
-        totalBalance: parseFloat(req.body.amount)
-      }
+        totalBalance: parseFloat(req.body.amount),
+      },
     });
 
     return res.status(200).json(user);

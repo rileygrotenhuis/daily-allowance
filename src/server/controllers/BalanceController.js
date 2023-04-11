@@ -14,7 +14,7 @@ class BalanceController {
       },
       data: {
         currentBalance: user.currentBalance - req.body.amount,
-        totalBalance: user.totalBalance - req.body.amount
+        totalBalance: user.totalBalance - req.body.amount,
       },
     });
 

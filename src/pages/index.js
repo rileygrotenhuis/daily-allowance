@@ -24,9 +24,8 @@ export const getServerSideProps = async (context) => {
 const Home = (props) => {
   const [newAmountModalOpen, setNewAmountModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
-  const [totalBalance, setTotalBalance] = useState(
-    props.user.totalBalance
-  );
+  const [totalBalance, setTotalBalance] = useState(props.user.totalBalance);
+  const [newTotalBalance, setNewTotalBalance] = useState(null);
   const [currentBalance, setCurrentBalance] = useState(
     props.user.currentBalance
   );
@@ -76,19 +75,16 @@ const Home = (props) => {
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch(
-                  'http://localhost:3000/api/balance',
-                  {
-                    method: 'POST',
-                    headers: {
-                      Authorization: `Bearer ${props.user.id}`,
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      amount: newAmount,
-                    }),
-                  }
-                );
+                const res = await fetch('http://localhost:3000/api/balance', {
+                  method: 'POST',
+                  headers: {
+                    Authorization: `Bearer ${props.user.id}`,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    amount: newAmount,
+                  }),
+                });
 
                 const data = await res.json();
 
@@ -135,31 +131,29 @@ const Home = (props) => {
               variant="outlined"
               label="Total"
               type="number"
-              value={totalBalance}
+              value={newTotalBalance}
               onChange={(e) => {
-                setTotalBalance(e.target.value);
+                setNewTotalBalance(e.target.value);
               }}
             />
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch(
-                  'http://localhost:3000/api/total',
-                  {
-                    method: 'PUT',
-                    headers: {
-                      Authorization: `Bearer ${props.user.id}`,
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      amount: totalBalance,
-                    }),
-                  }
-                );
+                const res = await fetch('http://localhost:3000/api/total', {
+                  method: 'PUT',
+                  headers: {
+                    Authorization: `Bearer ${props.user.id}`,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    amount: newTotalBalance,
+                  }),
+                });
 
                 const data = await res.json();
 
                 setTotalBalance(data.totalBalance);
+                setNewTotalBalance(null);
                 setSettingsModalOpen(false);
               }}
             >
@@ -186,19 +180,16 @@ const Home = (props) => {
             <Button
               variant="contained"
               onClick={async () => {
-                const res = await fetch(
-                  'http://localhost:3000/api/allowance',
-                  {
-                    method: 'PUT',
-                    headers: {
-                      Authorization: `Bearer ${props.user.id}`,
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      amount: dailyAllowance,
-                    }),
-                  }
-                );
+                const res = await fetch('http://localhost:3000/api/allowance', {
+                  method: 'PUT',
+                  headers: {
+                    Authorization: `Bearer ${props.user.id}`,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    amount: dailyAllowance,
+                  }),
+                });
 
                 const data = await res.json();
 
@@ -221,19 +212,16 @@ const Home = (props) => {
               variant="contained"
               color="error"
               onClick={async () => {
-                const res = await fetch(
-                  'http://localhost:3000/api/balance',
-                  {
-                    method: 'PUT',
-                    headers: {
-                      Authorization: `Bearer ${props.user.id}`,
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      amount: dailyAllowance,
-                    }),
-                  }
-                );
+                const res = await fetch('http://localhost:3000/api/balance', {
+                  method: 'PUT',
+                  headers: {
+                    Authorization: `Bearer ${props.user.id}`,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    amount: dailyAllowance,
+                  }),
+                });
 
                 const data = await res.json();
 
@@ -267,15 +255,11 @@ const Home = (props) => {
             alignItems: 'center',
           }}
         >
-          <Typography
-            variant="h3"
-          >
-            ${currentBalance}
-          </Typography>
+          <Typography variant="h3">${currentBalance}</Typography>
           <Typography
             variant="subtitle1"
             style={{
-              fontWeight: 'lighter'
+              fontWeight: 'lighter',
             }}
           >
             (${totalBalance})
@@ -310,16 +294,13 @@ const Home = (props) => {
             margin: 'auto',
           }}
           onClick={async () => {
-            const res = await fetch(
-              'http://localhost:3000/api/day',
-              {
-                method: 'POST',
-                headers: {
-                  Authorization: `Bearer ${props.user.id}`,
-                  'Content-Type': 'application/json',
-                },
-              }
-            );
+            const res = await fetch('http://localhost:3000/api/day', {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${props.user.id}`,
+                'Content-Type': 'application/json',
+              },
+            });
 
             const data = await res.json();
 
