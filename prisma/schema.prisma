@@ -17,6 +17,7 @@ model User {
   sessions       Session[]
   dailyAllowance Float @default(0.00)
   currentBalance Float @default(0.00)
+  totalBalance   Float @default(0.00)
 }
 
 model Account {
