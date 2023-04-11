@@ -24,6 +24,9 @@ export const getServerSideProps = async (context) => {
 const Home = (props) => {
   const [newAmountModalOpen, setNewAmountModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [totalBalance, setTotalBalance] = useState(
+    props.user.totalBalance
+  );
   const [currentBalance, setCurrentBalance] = useState(
     props.user.currentBalance
   );
@@ -74,7 +77,7 @@ const Home = (props) => {
               variant="contained"
               onClick={async () => {
                 const res = await fetch(
-                  'https://allowance.rileygrotenhuis.com/api/balance',
+                  'http://localhost:3000/api/balance',
                   {
                     method: 'POST',
                     headers: {
@@ -91,6 +94,7 @@ const Home = (props) => {
 
                 setCurrentBalance(data.currentBalance);
                 setDailyAllowance(data.dailyAllowance);
+                setTotalBalance(data.totalBalance);
                 setNewAmount(null);
                 setNewAmountModalOpen(false);
               }}
@@ -119,6 +123,49 @@ const Home = (props) => {
             p: 4,
           }}
         >
+          <Typography variant="h5">Change Total Balance</Typography>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: '10px',
+            }}
+          >
+            <TextField
+              variant="outlined"
+              label="Total"
+              type="number"
+              value={totalBalance}
+              onChange={(e) => {
+                setTotalBalance(e.target.value);
+              }}
+            />
+            <Button
+              variant="contained"
+              onClick={async () => {
+                const res = await fetch(
+                  'http://localhost:3000/api/total',
+                  {
+                    method: 'PUT',
+                    headers: {
+                      Authorization: `Bearer ${props.user.id}`,
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      amount: totalBalance,
+                    }),
+                  }
+                );
+
+                const data = await res.json();
+
+                setTotalBalance(data.totalBalance);
+                setSettingsModalOpen(false);
+              }}
+            >
+              Submit
+            </Button>
+          </div>
           <Typography variant="h5">Change Daily Allowance</Typography>
           <div
             style={{
@@ -140,7 +187,7 @@ const Home = (props) => {
               variant="contained"
               onClick={async () => {
                 const res = await fetch(
-                  'https://allowance.rileygrotenhuis.com/api/allowance',
+                  'http://localhost:3000/api/allowance',
                   {
                     method: 'PUT',
                     headers: {
@@ -175,7 +222,7 @@ const Home = (props) => {
               color="error"
               onClick={async () => {
                 const res = await fetch(
-                  'https://allowance.rileygrotenhuis.com/api/balance',
+                  'http://localhost:3000/api/balance',
                   {
                     method: 'PUT',
                     headers: {
@@ -215,17 +262,23 @@ const Home = (props) => {
             height: '300px',
             borderRadius: '25px',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
           <Typography
             variant="h3"
-            style={{
-              margin: 'auto',
-            }}
           >
             ${currentBalance}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            style={{
+              fontWeight: 'lighter'
+            }}
+          >
+            (${totalBalance})
           </Typography>
         </Card>
       </Button>
@@ -258,7 +311,7 @@ const Home = (props) => {
           }}
           onClick={async () => {
             const res = await fetch(
-              'https://allowance.rileygrotenhuis.com/api/day',
+              'http://localhost:3000/api/day',
               {
                 method: 'POST',
                 headers: {
