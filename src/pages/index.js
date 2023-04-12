@@ -255,14 +255,14 @@ const Home = (props) => {
             alignItems: 'center',
           }}
         >
-          <Typography variant="h3">${currentBalance}</Typography>
+          <Typography variant="h3">${currentBalance.toFixed(2)}</Typography>
           <Typography
             variant="subtitle1"
             style={{
               fontWeight: 'lighter',
             }}
           >
-            (${totalBalance})
+            (${totalBalance.toFixed(2)})
           </Typography>
         </Card>
       </Button>
